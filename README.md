@@ -1,29 +1,31 @@
 # music-spotify-temp
 
-Music Search App using Spotify API
-
-# Music Search App
-
 ## Project Overview
 
-This project is a music search application that utlizes the Spotify Web API, music artists and their catalog. The following features included in this project are:
+This project is a music search application that utlizes the Spotify Web API to search for music artist, songs and albums . The following features included in this project are:
 (1) Login Screen
 (2) Search form to lookup artist, album and/or song
+(3) 
+
+The goal is to have a functional frontend and backend 
 
 ---
 
 ## Prerequisites
 
 The following are to be installed:
-
 - **Node.js** v18 or higher
 - **npm** v9 or higher
 - Modern Browser used: (Chrome, Edge, FireFox and/or Safari)
 - **GitHub**
-  -Spotify Developer Account [https://developer.spotify.com/documentation/web-api] for API access
+- Spotify Developer Account [https://developer.spotify.com] for API access
 
 ---
 
 ## Getting Started
 
-## Instructions to set up project
+
+## Links
+http://localhost:3000
+
+
