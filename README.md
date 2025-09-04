@@ -30,11 +30,11 @@ To properly setup for this project, there are some packages that need to be inst
 
 Once your text editor is open with your project, use the command <npm init -y> to load the package.json file, node_modules and create ".env" file to that will store your environment variables (API_KEY, PORT, etc) 
 
-### Index.js
+**Index.js**
  You will create index file for the backend Express application inside your project and start the development stage to make sure that the localhost server is running properly without errors in terminal.
-
- <cd music-temp>
- <npm run dev>
+    
+cd music-temp
+ npm run dev
 
 
 ---
