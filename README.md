@@ -32,8 +32,8 @@ Once your text editor is open with your project, use the command <npm init -y> t
 **Index.js**
  You will create index file for the backend Express application inside your project and start the development stage to make sure that the localhost server is running properly without errors in terminal.
     
-cd music-temp
-npm run dev
+- cd music-temp
+- npm run dev
 
 
 ---
