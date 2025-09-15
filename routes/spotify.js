@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const spotifyController = require("../controllers/spotifyController");
+const { verifyToken } = require("../middleware/authTracker");
 
 //Search route:
 router.get("/search", spotifyController.search);

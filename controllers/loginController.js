@@ -59,8 +59,12 @@ exports.callback = async (req, res) => {
 
 // Refresh token route
 exports.refreshToken = async (req, res) => {
-  const refreshToken = req.query.refresh_token;
+  const { refreshToken } = req.query;
   if (!refreshToken) {
     return res.status(400).json({ error: "Missing refresh_token parameter" });
+  }
+
+  try{
+    
   }
 };

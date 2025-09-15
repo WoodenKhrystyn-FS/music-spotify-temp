@@ -1,12 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/index");
+const spotifyRoutes = require("./routes/spotify");
+
+
 
 // Initialize Express app
 const app = express();
@@ -15,10 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static("public"));
 app.use("/api", authRoutes);
+app.use("/spotify", spotifyRoutes);
 
 app.use("/auth", authRoutes);
 
-// Load environment variables
+// Load env. variables
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.DB_URL || "mongodb://localhost:27017/musicDB";
 
@@ -43,6 +45,8 @@ app.get("/", (req, res) => {
   });
 });
 
+
+//Start serverL
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

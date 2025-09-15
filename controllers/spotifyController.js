@@ -1,46 +1,38 @@
 const axios = require("axios");
-const User = require("../models/User");
 
-async function getSpotifyData(userId) {
-  const user = await User.findById(userId);
-  return user;
-}
+const getAuthHeader = (token) => ({
+  Authorization: `Bearer ${token}`,
+});
 
-exports.searchArtist = async (req, res) => {
-  try {
-    const { query } = req.query;
-    const artist = await spotifyService.searchArtist(
-      req.user.accessToken,
-      query
-    );
-    res.json(artist);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to search artist " });
-  }
+exports.searchArtist = async (token, query) => {
+  const response = await axios.get("https://api.spotify.com/v1/search", {
+    headers: getAuthHeader(token),
+    params: {
+      q: query,
+      type: "artist",
+    },
+  });
+  return response.data.artists.items;
 };
 
-exports.searchAlbums = async (req, res) => {
-  try {
-    const { query } = req.query;
-    const albums = await spotifyService.searchAlbums(
-      req.user.accessToken,
-      query
-    );
-    res.json(albums);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to search albums" });
-  }
+exports.searchAlbums = async (token, query) => {
+ const response = await axios.get("https://api.spotify.com/v1/search", {
+   headers: getAuthHeader(token),
+   params: {
+     q: query,
+     type: "album",
+   },
+ });
+ return response.data.albums.items;
 };
 
-exports.searchTracks = async (req, res) => {
-  try {
-    const { query } = req.query;
-    const tracks = await spotifyService.searchTracks(
-      req.user.accessToken,
-      query
-    );
-    res.json(tracks);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to search tracks" });
-  }
+exports.searchTracks = async (token, query) => {
+  const response = await axios.get("https://api.spotify.com/v1/search", {
+    headers: getAuthHeader(token),
+    params: {
+      q: query,
+      type: "track",
+    },
+  });
+  return response.data.tracks.items;
 };
