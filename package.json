@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": [],
+  "keywords": ["spotify", "music", "backend", "express"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
