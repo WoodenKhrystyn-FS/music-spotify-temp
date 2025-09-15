@@ -19,6 +19,6 @@ router.get("/refresh_token", authTracker.refreshToken)
 
 
 // POST login
-router.post("/", async (req, res) => {});
+router.post("/token", authTracker.getAccessToken);
 
 module.exports = router;

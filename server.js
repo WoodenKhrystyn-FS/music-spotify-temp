@@ -1,13 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const axios = require("axios");
+
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-const path = require("path");
-const fs = require("fs");
+
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-
+const authRoutes = require("./routes/index");
 
 // Initialize Express app
 const app = express();
@@ -15,6 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static("public"));
+app.use("/api", authRoutes);
+
+app.use("/auth", authRoutes);
 
 // Load environment variables
 const PORT = process.env.PORT || 3000;
@@ -23,7 +25,7 @@ const DB_URL = process.env.DB_URL || "mongodb://localhost:27017/musicDB";
 //CORS:
 app.use(
   cors({
-    origin: "http://localhost:4200", // Adjust this to your frontend URL
+    origin: "http://localhost:4200",
     credentials: true,
   })
 );
@@ -34,11 +36,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-
-
-
-
-// Basic route to check server status
 app.get("/", (req, res) => {
   res.json({
     message:
