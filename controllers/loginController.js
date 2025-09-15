@@ -64,10 +64,28 @@ exports.refreshToken = async (req, res) => {
     return res.status(400).json({ error: "Missing refresh_token parameter" });
   }
 
-  try{
-    
+  try {
+    const params = new URLSearchParams({
+      grant_type: "refresh token",
+      refreshToken,
+    });
 
+    const tokenResponse = await fetch(
+      "https://accounts.spotify.com/api/token",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${Buffer.from(
+            `${clientId}:${clientSecret}`
+          ).toString("base64")}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
   } catch (error) {
-
+    console.error("Error in refreshing Token:", error);
+    res
+      .status(500)
+      .json({ error: "Internal Server Error during refreshing Token" });
   }
 };
