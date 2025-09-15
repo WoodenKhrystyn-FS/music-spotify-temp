@@ -19,6 +19,7 @@ The following are to be installed:
 - **npm** v11 or higher
 - **React** for Frontend
 - **Express** for Backend
+- **MongoDB** for DB
 - **GitHub**
 - Modern Browser used: (Chrome, Edge, FireFox and/or Safari)
 - Spotify Developer Account [https://developer.spotify.com] for API access
