@@ -35,8 +35,7 @@ exports.logout = (req, res) => {
 // Callback route for Spotify auth:
 exports.callback = async (req, res) => {
   const { code } = req.query;
-
-  if (!code) return res.status(400).json({ error: "Code Missing" });
+  if (!code) return res.status(400).json({ error: "Code Is Missing" });
 
   try {
     const params = new URLSearchParams({
@@ -66,7 +65,7 @@ exports.callback = async (req, res) => {
     if (!access_token) {
       return res
         .status(400)
-        .json({ error: "Failed to get access token from Spotify" });
+        .json({ error: "Failed to get access token from Spotify", details: info });
     }
 
     //Request user profile info:
@@ -75,7 +74,7 @@ exports.callback = async (req, res) => {
     });
     const profile = await userProfile.json();
 
-    //Request to save/edit user and save in Mongo:
+    //Request to save or edit user and save in Mongo:
     const user = await User.findOneAndUpdate(
       { spotifyId: profile.id },
       { displayName: profile.display_name, refreshToken: refresh_token },
@@ -86,7 +85,7 @@ exports.callback = async (req, res) => {
     const jwtToken = jwt.sign(
       { id: user._id, spotifyId: profile.id },
       process.env.JWT_SECRET,
-      { expiresIn: "3600s" }
+      { expiresIn: "1m" } //Dummy time for testing is 1min, will change to 1hr later
     );
 
     res.cookie("token", jwtToken, { httpOnly: true, maxAge: 3600 * 1000 });
@@ -97,29 +96,4 @@ exports.callback = async (req, res) => {
       .status(500)
       .json({ error: "Internal Server Error during Spotify callback" });
   }
-  const params = new URLSearchParams({
-    grant_type: "refresh_token",
-    refresh_token: refreshToken,
-  });
-
-  const tokenResponse = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${Buffer.from(
-        `${clientId}:${clientSecret}`
-      ).toString("base64")}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: params.toString(),
-  });
-  const info = await tokenResponse.json();
-  if (!info.access_token) {
-    return res.status(400).json({ error: "Failed to refresh access token" });
-  }
-  res
-    .status(200)
-    .json({
-      access_token: info.access_token,
-      refresh_token: info.refresh_token,
-    });
 };

@@ -7,8 +7,6 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/index");
 const spotifyRoutes = require("./routes/spotify");
 
-
-
 // Initialize Express app
 const app = express();
 app.use(express.json());
@@ -44,7 +42,6 @@ app.get("/", (req, res) => {
       "Server is running. Navigate to /login to authenticate with Spotify.",
   });
 });
-
 
 //Start serverL
 app.listen(PORT, () => {
