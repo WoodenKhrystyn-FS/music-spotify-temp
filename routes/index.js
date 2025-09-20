@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const authTracker = require("../middleware/authTracker");
+const spotifyController = require("../controllers/spotifyController");
+const loginController = require("../controllers/loginController");
 
 // GET login status
 router.get("/login", authTracker.login);

@@ -32,7 +32,7 @@ exports.logout = (req, res) => {
   res.status(200).json({ message: "Logged out successfully" });
 };
 
-// Callback route for Spotify auth:
+// Callback route for Spotify Oauth:
 exports.callback = async (req, res) => {
   const { code } = req.query;
   if (!code) return res.status(400).json({ error: "Code Is Missing" });
@@ -83,7 +83,10 @@ exports.callback = async (req, res) => {
 
     //JWT:
     const jwtToken = jwt.sign(
-      { id: user._id, spotifyId: profile.id },
+      { id: user._id, 
+        spotifyId: profile.id, 
+        access_token: access_token 
+      },
       process.env.JWT_SECRET,
       { expiresIn: "1m" } //Dummy time for testing is 1min, will change to 1hr later
     );
