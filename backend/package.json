@@ -1,0 +1,52 @@
+{
+  "name": "music-spotify-temp",
+  "version": "1.0.0",
+  "description": "This project is a music search application that utlizes the Spotify Web API to search for music artist, songs and albums . The following features included in this project are:",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "music",
+    "spotify",
+    "search",
+    "api",
+    "nodejs",
+    "express",
+    "mongoose",
+    "cors",
+    "dotenv",
+    "axios",
+    "cookie-parser",
+    "node-fetch",
+    "querystring",
+    "spotify-web-api-node",
+    "rest api",
+    "web api",
+    "backend",
+    "javascript",
+    "fullstack",
+    "developer",
+    "programming"
+  ],
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.1",
+    "node-fetch": "^3.3.2",
+    "querystring": "^0.2.1",
+    "spotify-web-api-node": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
