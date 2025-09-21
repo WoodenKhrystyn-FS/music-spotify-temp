@@ -1,0 +1,97 @@
+import React, { useState } from "react";
+import NavBar from "../components/NavBar";
+import ResultsCard from "../components/ResultsCard";
+
+function Search() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/login");
+  // };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setError("");
+    setResults([]);
+
+    if (!query) {
+      setError("Plese enter search input");
+      return;
+    }
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `https://localhost:3000/api/spotify/search?q=${query}&type=track,album,artist&limit=10`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "No results found");
+        return;
+      }
+
+      setResults({
+        tracks: data.tracks || [],
+        albums: data.albums || [],
+        artists: data.artists || [],
+      });
+    } catch (err) {
+      setError("Network error, try again later");
+    }
+  };
+
+  return (
+    <div className="search-page" style={styles.container}>
+      <NavBar />
+      <h1>Search With Spotify</h1>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search for tracks, albums, artists..."
+        />
+        <button type="submit" style={styles.button}>
+          Search
+        </button>
+      </form>
+      {error && <p>{error}</p>}
+      <ul className="results-list">
+        {results.map((item) => (
+          <li key={item.id}>
+            <ResultsCard item={item} type={item.type} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+export default Search;
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    backgroundColor: "#f0f0f0",
+  },
+  button: {
+    padding: "10px 20px",
+    fontSize: "16px",
+    cursor: "pointer",
+  },
+  input: { marginRight: "10px", padding: "10px", fontSize: "16px" },
+  resultsList: { listStyleType: "none", padding: 0, marginTop: "20px" },
+  
+};
