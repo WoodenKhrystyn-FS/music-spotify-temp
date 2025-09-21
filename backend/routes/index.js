@@ -6,15 +6,17 @@ const { verifyToken } = require("../middleware/authTracker");
 //Login status
 router.get("/login", loginController.login);
 
-//Logout
-router.get("/logout", loginController.logout);
-
 //Callback route
 router.get("/callback", loginController.callback);
 
-//
+//Protected route example
 router.get("/protected", verifyToken, (req, res) => {
   res.status(200).json({ message: "Access to protected route granted", user: req.user });
+});
+
+//JWT validation route
+router.get("/validateToken", verifyToken, (req, res) => {
+  res.status(200).json({ message: "Token is valid", user: req.user });
 });
 
 //Refresh token route

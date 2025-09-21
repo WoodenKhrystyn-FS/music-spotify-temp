@@ -17,12 +17,14 @@ function Search() {
       return;
     }
     try {
-      const token = localStorage.getItem("token");
+     
       const response = await fetch(
         `http://localhost:3000/spotify/search?q=${query}&type=track,album,artist&limit=10`,
         {
+          method: "GET",
+          credentials: "include",
           headers: {
-            Authorization: `Bearer ${token}`,
+           "Content-Type": "application/json",
           },
         }
       );
