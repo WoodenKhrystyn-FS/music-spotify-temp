@@ -7,11 +7,6 @@ function Search() {
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   navigate("/login");
-  // };
-
   const handleSearch = async (e) => {
     e.preventDefault();
     setError("");
@@ -24,7 +19,7 @@ function Search() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://localhost:3000/api/spotify/search?q=${query}&type=track,album,artist&limit=10`,
+        `http://localhost:3000/spotify/search?q=${query}&type=track,album,artist&limit=10`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,11 +34,14 @@ function Search() {
         return;
       }
 
-      setResults({
-        tracks: data.tracks || [],
-        albums: data.albums || [],
-        artists: data.artists || [],
-      });
+      //Putting all results into one array:
+      const combinedResults = [
+        ...(data.tracks?.items || []),
+        ...(data.albums?.items || []),
+        ...(data.artists?.items || []),
+      ];
+
+      setResults(combinedResults);
     } catch (err) {
       setError("Network error, try again later");
     }
@@ -93,5 +91,4 @@ const styles = {
   },
   input: { marginRight: "10px", padding: "10px", fontSize: "16px" },
   resultsList: { listStyleType: "none", padding: 0, marginTop: "20px" },
-  
 };

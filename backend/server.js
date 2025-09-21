@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const authRoutes = require("./backend/routes/index");
-const spotifyRoutes = require("./backend/routes/spotify");
+const authRoutes = require("./routes/index");
+const spotifyRoutes = require("./routes/spotify");
 
 const app = express();
 
@@ -34,9 +34,10 @@ app.use(
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.DB_URL)
+  .connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
+  console.log("DB_URL:", DB_URL);
 
 app.get("/", (req, res) => {
   res.json({
