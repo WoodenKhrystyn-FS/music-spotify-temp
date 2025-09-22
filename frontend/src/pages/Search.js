@@ -84,7 +84,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     height: "100vh",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#121212",
   },
   button: {
     padding: "10px 20px",

@@ -80,6 +80,9 @@ const styles = {
   link: {
     display: "inline-block",
     marginTop: "10px",
-    padding: "10px 15px",
+    color: "#1DB954",
+    backgroundColor: "fff",
+    textDecoration: "none",
+    fontWeight: "bold",
   },
 };
