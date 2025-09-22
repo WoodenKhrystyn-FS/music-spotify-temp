@@ -68,12 +68,18 @@ const styles = {
     margin: 0,
   },
   listItem: {
-    borderBottom: "1px solid #eee",
+    marginBottom: "1px solid #eee",
     padding: "10px 0",
   },
   image: {
     width: "100px",
     height: "100px",
+    borderRadius: "50%",
+    marginBottom: "10px",
   },
-  link: { marginTop: "10px", display: "inline-block" },
+  link: {
+    display: "inline-block",
+    marginTop: "10px",
+    padding: "10px 15px",
+  },
 };
