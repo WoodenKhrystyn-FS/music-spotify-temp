@@ -11,7 +11,9 @@ router.get("/callback", loginController.callback);
 
 //Protected route example
 router.get("/protected", verifyToken, (req, res) => {
-  res.status(200).json({ message: "Access to protected route granted", user: req.user });
+  res
+    .status(200)
+    .json({ message: "Access to protected route granted", user: req.user });
 });
 
 //JWT validation route
@@ -21,5 +23,13 @@ router.get("/validateToken", verifyToken, (req, res) => {
 
 //Refresh token route
 router.get("/refreshToken", loginController.refreshToken);
+
+//Test route:
+router.get("/test", (req, res) => {
+  const payload = { id: "testUserId" };
+  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+  console.log("Generated Test Token:", token);
+  res.json({ token });
+});
 
 module.exports = router;
