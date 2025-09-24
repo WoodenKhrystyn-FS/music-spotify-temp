@@ -11,6 +11,8 @@ import NavBar from "./components/NavBar";
 import Protected from "./pages/Protected";
 import Search from "./pages/Search";
 
+import PrivateRoute from "./components/PrivateRoute";
+
 function App() {
   const isVerified = !!localStorage.getItem("token");
 
@@ -30,16 +32,18 @@ function App() {
           <Route
             path="/protected"
             element={
-              localStorage.getItem("token") ? (
+              <PrivateRoute>
                 <Protected />
-              ) : (
-                <Navigate to="/login" />
-              )
+              </PrivateRoute>
             }
           />
           <Route
             path="/search"
-            element={isVerified ? <Search /> : <Navigate to="/login" />}
+            element={
+              <PrivateRoute>
+                <Search />
+              </PrivateRoute>
+            }
           />
         </Routes>
       </Router>
