@@ -1,11 +1,19 @@
 import React from "react";
 
-function ResultsCard({ item, type }) {
-  const name = item.name;
-  const artists = item.artists;
 
+//Component to display individual search results in a card format
+//Types can be 'track', 'album', or 'artist'
+//Item contains the data for the specific result
+
+function ResultsCard({ item, type }) {
+  //Destructure fields from item object
+  const name = item.name; //Name of artist, ablum or track
+  const artists = item.artists;//Name of arttist per track or album
+
+  
   const imageUrl =
-    item.album?.images?.[0]?.url || item.images?.[0]?.url || null;
+    item.album?.images?.[0]?.url || item.images?.[0]?.url || null; //Gets the image url from artist or album object
+
 
   return (
     <div className="results-card" style={styles.card}>

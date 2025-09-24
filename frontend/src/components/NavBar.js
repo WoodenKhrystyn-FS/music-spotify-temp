@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
 
 function NavBar() {
+  //Navigation bar with links to different pages and a logout button
   return (
     <nav className="navbar" style={styles.navbar}>
       <Link to="/search" style={styles.link}>
@@ -18,6 +19,8 @@ function NavBar() {
 
 export default NavBar;
 
+
+//Styles NavBar component
 const styles = {
   navbar: {
     display: "flex",

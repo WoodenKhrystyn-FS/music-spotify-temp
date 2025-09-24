@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+//Logout button to clear token and redirected to login page
+
 function LogoutBtn() {
   const navigate = useNavigate();
 

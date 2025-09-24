@@ -38,7 +38,7 @@ exports.search = async (req, res) => {
 // Search for artists
 exports.getArtist = async (req, res) => {
   const { id } = req.params;
-  const token = req.headers.authorization?.split(" ")[1]; // Expect
+  const token = req.headers.authorization?.split(" ")[1]; 
   if (!token) {
     return res.status(401).json({ error: "No token provided" });
   }

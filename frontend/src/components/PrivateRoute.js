@@ -1,8 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { validToken } from "../utils/auth";
 
+//Protects routes requiring authentication
+
 function PrivateRoute({ children }) {
-    // return validToken() ? children : <Navigate to={"/login"} />;
+  //If the user is authenticated, render the child components (protected routes)
+
+  const token = localStorage.getItem("token");
+  const tokenExpire = localStorage.getItem("tokenExpiry");
+
   if (validToken()) {
     return children;
   } else {
