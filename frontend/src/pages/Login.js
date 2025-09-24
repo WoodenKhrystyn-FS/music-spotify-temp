@@ -25,12 +25,55 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-page" style={styles.container}>
       <h1>Login</h1>
       <p>Click the button below to login with Spotify:</p>
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin} style={styles.button}>
+        Login
+      </button>
     </div>
   );
 }
 
 export default Login;
+
+//Styling:
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  button: {
+    padding: "10px 20px",
+    marignLeft: "10px",
+    backgroundColor: "#1DB954",
+    color: "white",
+  },
+};
+
+// --- IGNORE ---
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+
+// //Login page Component
+// function Login() {
+//   const navigate = useNavigate();
+
+//   const handleLogin = () => {
+//     window.location.href = "https://localhost:3000/api/auth/login";
+//   };
+
+//   return (
+//     <div className="login-page">
+//       <h1>Login</h1>
+//       <p>Click the button below to login with Spotify:</p>
+//       <button onClick={handleLogin}>Login</button>
+//     </div>
+//   );
+// }
+
+// export default Login;
+// --- IGNORE ---
