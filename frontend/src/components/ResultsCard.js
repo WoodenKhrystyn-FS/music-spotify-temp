@@ -1,39 +1,36 @@
 import React from "react";
 
 function ResultsCard({ item, type }) {
+  const name = item.name;
+  const artists = item.artists;
+
+  const imageUrl =
+    item.album?.images?.[0]?.url || item.images?.[0]?.url || null;
+
   return (
     <div className="results-card" style={styles.card}>
       <h2>Search Results</h2>
       <br />
-      {item.album?.images?.[0]?.url && (
-        <img
-          src={item.album?.images?.[0]?.url}
-          alt={item.name}
-          style={styles.image}
-        />
+      {imageUrl && (
+        <img src={imageUrl} alt={name} style={styles.image} />
       )}
       ;
-      {item.images?.[0]?.url && (
-        <img src={item.images?.[0]?.url} alt={item.name} style={styles.image} />
-      )}
-      ;
+      
       <div className="results-list" style={styles.list}>
         <div className="results-item" style={styles.listItem}>
-          <h3>{item.name}</h3>
-          {item.artist && (
+          <h3>{name}</h3>
+          {artists && (
             <p>
               Artist:
-              {item.artists.map((artist) => {
-                return artist.name;
+              {artists.map((artist) => {
+                return artist.name + " ";
               })}
             </p>
           )}
           {item.album && (
             <p>
               Album:
-              {item.album.map((album) => {
-                return album.name;
-              })}
+              {item.album.name}
             </p>
           )}
           {(item.total_tracks || item.followers) && (
@@ -43,9 +40,15 @@ function ResultsCard({ item, type }) {
           {item.type && <p>Type: {item.type}</p>}
         </div>
       </div>
-      <a href={item.external_urls.spotify} style={styles.link}>
-        Open in Spotify
-      </a>
+      {item.external_urls?.spotify && (
+        <a
+          href={item.external_urls.spotify}
+          rel="noopener noreferrer"
+          style={styles.link}
+        >
+          Open in Spotify
+        </a>
+      )}
     </div>
   );
 }

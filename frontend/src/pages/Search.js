@@ -42,8 +42,12 @@ function Search() {
         ...(data.artists?.items || []),
       ];
 
+      if (combinedResults.length === 0) {
+        setError("No results found. Please try a new search");
+      }
+
       setResults(combinedResults);
-    } catch (err) {
+    } catch (error) {
       setError("Network error, try again later");
     }
   };
@@ -64,14 +68,22 @@ function Search() {
           Search
         </button>
       </form>
+
       {error && <p>{error}</p>}
-      <ul className="results-list" style={styles.resultsList}>
-        {results.map((item) => (
-          <li key={item.id}>
-            <ResultsCard item={item} type={item.type} />
-          </li>
-        ))}
-      </ul>
+
+      {!error && results.length === 0 && query && (
+        <p>No results found. Try a different search.</p>
+      )}
+
+      {results.length > 0 && (
+        <ul className="results-list" style={styles.resultsList}>
+          {results.map((item) => (
+            <li key={item.id}>
+              <ResultsCard item={item} type={item.type} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
