@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+//Login page Component
 function Login() {
   const navigate = useNavigate();
 
@@ -8,16 +9,15 @@ function Login() {
     const expires = new Date(localStorage.getItem("tokenExpire"));
     const token = localStorage.getItem("token");
 
-    if (!token) {
-      window.location.href = "https://localhost:3000/api/auth/login";
-    } else if (new Date() < expires) {
-      //Token is valid
-      navigate("/dashboard");
+    if (token && expires > new Date()) {
+      //No token, redirect to login page
+      navigate("/login");
+      // window.location.href = "https://localhost:3000/api/auth/login";
     } else {
       //Token expired and refreshes
       localStorage.removeItem("token");
       localStorage.removeItem("tokenExpire");
-      window.location.href = "https://localhost:3000/api/auth/refreshToken";
+      navigate("/login");
     }
   }, [navigate]);
   const handleLogin = () => {
