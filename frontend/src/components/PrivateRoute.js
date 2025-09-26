@@ -8,7 +8,6 @@ function PrivateRoute({ children }) {
   //If the user is authenticated, render the child components
 
   const token = localStorage.getItem("token");
-  //const tokenExpire = localStorage.getItem("tokenExpiry");
 
   return token ? children : <Navigate to="/login" replace />;
 }
