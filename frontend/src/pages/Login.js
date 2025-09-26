@@ -2,34 +2,37 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Login page Component
+
 function Login() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    const expires = new Date(localStorage.getItem("tokenExpire"));
-    const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const expires = new Date(localStorage.getItem("tokenExpire"));
+  //   const token = localStorage.getItem("token");
 
-    if (token && expires > new Date()) {
-      //No token, redirect to login page
-      navigate("/login");
-      // window.location.href = "https://localhost:3000/api/auth/login";
-    } else {
-      //Token expired and refreshes
-      localStorage.removeItem("token");
-      localStorage.removeItem("tokenExpire");
-      navigate("/login");
-    }
-  }, [navigate]);
+  //   if (token && expires > new Date()) {
+  //     //No token, redirect to login page
+  //     navigate("/login");
+  //     // window.location.href = "https://localhost:3000/api/auth/login";
+  //   } else {
+  //     //Token expired and refreshes
+  //     localStorage.removeItem("token");
+  //     localStorage.removeItem("tokenExpire");
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
+
+  //Redirecting user to the backend authorization
   const handleLogin = () => {
     window.location.href = "https://localhost:3000/api/auth/login";
   };
 
   return (
-    <div className="login-page" style={styles.container}>
-      <h1>Login</h1>
-      <p>Click the button below to login with Spotify:</p>
+    <div style={styles.container}>
+      <h1>Search Spotify Music</h1>
+      <p>Click the button below to login with Spotify</p>
       <button onClick={handleLogin} style={styles.button}>
-        Login
+        Login with Spotify
       </button>
     </div>
   );
