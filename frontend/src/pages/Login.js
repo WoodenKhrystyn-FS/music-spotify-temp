@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BiBorderRadius } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 //Login page Component
@@ -47,13 +48,18 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#121212",
+    color: "white",
+    textAlign: "center",
   },
 
   button: {
     padding: "10px 20px",
-    marignLeft: "10px",
+    marignLeft: "10px 12px",
+    fontSize: "15px",
     backgroundColor: "#1DB954",
     color: "white",
+    BiBorderRadius: "30px",
   },
 };
 
