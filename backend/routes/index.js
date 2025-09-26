@@ -8,7 +8,7 @@ const { verifyToken } = require("../middleware/authTracker");
 router.get("/login", loginController.login);
 
 //Callback route
-router.get("/callback", loginController.callback);
+router.get("/spotify/callback", loginController.callback);
 
 //Protected route example
 router.get("/protected", verifyToken, (req, res) => {

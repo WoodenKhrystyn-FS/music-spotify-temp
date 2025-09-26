@@ -13,6 +13,8 @@ import Search from "./pages/Search";
 
 import PrivateRoute from "./components/PrivateRoute";
 
+import AuthSuccess from "./pages/AuthSuccess";
+
 function App() {
   const isVerified = !!localStorage.getItem("token");
 
@@ -29,6 +31,9 @@ function App() {
             path="/login"
             element={isVerified ? <Navigate to="/search" /> : <Login />}
           />
+
+          <Route path="/auth/success" element={<AuthSuccess />} />
+          
           <Route
             path="/protected"
             element={
