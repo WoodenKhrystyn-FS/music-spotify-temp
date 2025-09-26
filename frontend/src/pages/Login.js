@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { BiBorderRadius } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+// import { BiBorderRadius } from "react-icons/bi";
+// import { useNavigate } from "react-router-dom";
 
 //Login page Component
 
