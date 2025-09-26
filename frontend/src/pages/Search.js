@@ -56,6 +56,8 @@ function Search() {
     <div className="search-page" style={styles.container}>
       <NavBar />
       <h1>Search With Spotify</h1>
+
+
       <form onSubmit={handleSearch} style={styles.form}>
         <input
           type="text"
@@ -71,10 +73,13 @@ function Search() {
 
       {error && <p>{error}</p>}
 
+
+      //Shown if no results found
       {!error && results.length === 0 && query && (
         <p>No results found. Try a different search.</p>
       )}
 
+      //Valid results shown:
       {results.length > 0 && (
         <ul className="results-list" style={styles.resultsList}>
           {results.map((item) => (
@@ -120,7 +125,6 @@ const styles = {
 
   resultsList: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
     gap: "20px",
     width: "80%",
     listStyleType: "none",
