@@ -23,7 +23,7 @@ router.get("/validateToken", verifyToken, (req, res) => {
 });
 
 //Refresh token route
-router.get("/refreshToken", loginController.refreshToken);
+router.post("/refreshToken", loginController.refreshToken);
 
 //Test route:
 router.get("/test", (req, res) => {

@@ -18,7 +18,7 @@ function PrivateRoute({ children }) {
 
       try {
         const response = await fetch(
-          "https://localhost:3000/api/validateToken",
+          "http://localhost:3000/api/validateToken",
           {
             method: "GET",
             headers: {
@@ -30,11 +30,10 @@ function PrivateRoute({ children }) {
         if (response.ok) {
           setIsVerified(true);
         } else {
-          localStorage.removeItem("token");
-          setIsVerified(false);
+          throw new Error("Token Not Valid");
         }
       } catch (error) {
-        console.log("Error in verifying token:", error);
+        console.log("Error in Verifying Token:", error);
         localStorage.removeItem("token");
         setIsVerified(false);
       }

@@ -11,12 +11,27 @@ const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 // Login route - checks if user is logged in by verifying JWT token
 const login = (req, res) => {
   try {
-    const user = { id: "123", name: "Test User" };
+    // const user = { id: "123", name: "Test User" };
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    res.json({ token });
+
+
+    //Redirecting to backend upon logging into Spotify:
+    const scope = "user-read-email user-read-private";
+    const redirectUrl =
+      `https://accounts.spotify.com/authorize?` +
+      `client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
+        redirectUri
+      )}` +
+      `&scope=${encodeURIComponent(scope)}`;
+
+    res.redirect(redirectUrl);
+
+    // const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    //   expiresIn: "1h",
+    // });
+    // res.json({ token });
+
+    
   } catch (error) {
     console.error("Error in login route:", error);
     return res.status(500).json({ error: "Internal Server Error" });

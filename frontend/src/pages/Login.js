@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 
-//Login page Component
+//Login page
 
 function Login() {
   //Redirecting user to the backend authorization(backend endpt)
   const handleLogin = () => {
-    window.location.href = "https://localhost:3000/api/auth/login";
+    window.location.href = "https://localhost:3000/api/login";
   };
 
   return (
     <div style={styles.container}>
       <h1>Search Spotify Music</h1>
-      <p>Click the button below to login with Spotify</p>
       <button onClick={handleLogin} style={styles.button}>
-        Login with Spotify
+        Login to Spotify
       </button>
     </div>
   );

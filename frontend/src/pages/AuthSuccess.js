@@ -6,13 +6,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const AuthSuccess = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    // const location = useLocation();
 
     useEffect(() => {
         // Parse token from URL hash or query string
        
-        const params = new URLSearchParams(hash.replace('#', ''));
-        const token = params.get('access_token');
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
 
         if (token) {
             // Store token in localStorage
@@ -23,7 +23,7 @@ const AuthSuccess = () => {
             // If no token, redirect to login
             navigate('/login');
         }
-    }, [location,navigate]);
+    }, [navigate]);
 
     return (
         <div>
