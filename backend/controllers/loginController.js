@@ -14,7 +14,7 @@ const login = (req, res) => {
     const user = { id: "123", name: "Test User" };
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: "2m",
+      expiresIn: "1h",
     });
     res.json({ token });
   } catch (error) {
@@ -75,19 +75,18 @@ const callback = async (req, res) => {
 
     //Sign JWT:
     const jwtToken = jwt.sign(
-      { id: user._id, spotifyId: profile.id, access_token: access_token },
+      { id: user._id, spotifyId: profile.id },
       process.env.JWT_SECRET,
-      { expiresIn: "1m" } //Dummy time for testing is 1min, will change to 1hr later
+      { expiresIn: "1h" } //Dummy time for testing is 1min, will change to 1hr later
     );
 
     res.cookie("token", jwtToken, {
       httpOnly: true,
       maxAge: 3600 * 1000,
-      sameSite: "Lax",
+      sameSite: "None",
+      secure: true,
     }); //1hr cookie
-    res
-      .status(200)
-      .json({ message: "Login successful", user, token: jwtToken });
+    res.redirect(`${process.env.FRONTEND_URL}/auth/success?token=${jwtToken}`);
   } catch (error) {
     console.error("Error during Spotify callback:", error);
     res
@@ -98,7 +97,38 @@ const callback = async (req, res) => {
 
 // GET refreshed token:
 const refreshToken = async (req, res) => {
-  res.status(200).json({ message: "Successfull token Refeshed" });
+  // res.status(200).json({ message: "Successfull token Refeshed" });
+
+  const { refresh_token } = req.body;
+
+  if (!refresh_token)
+    return res.status(400).json({ error: "Missing refreshed token" });
+
+  try {
+    const params = new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token,
+      client_id: clientId,
+      client_secret: clientSecret,
+    });
+
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
+
+    const data = await response.json();
+    if (data.error) return res.status(400).json(data);
+
+    res.json({
+      access_token: data.access_token,
+      expires_in: data.expires_in,
+    });
+  } catch (error) {
+    console.log("Error with refreshing token", error);
+    res.status(500).json({ error: "Token refreshed failed" });
+  }
 };
 
 module.exports = {

@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 //Catches the token, saves it and redirects back to login/search based on verification/validity:
 
 const AuthSuccess = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         // Parse token from URL hash or query string
-        const hash = window.location.hash;
+       
         const params = new URLSearchParams(hash.replace('#', ''));
         const token = params.get('access_token');
 
@@ -22,7 +23,7 @@ const AuthSuccess = () => {
             // If no token, redirect to login
             navigate('/login');
         }
-    }, [navigate]);
+    }, [location,navigate]);
 
     return (
         <div>

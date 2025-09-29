@@ -1,29 +1,9 @@
 import React, { useEffect } from "react";
-// import { BiBorderRadius } from "react-icons/bi";
-// import { useNavigate } from "react-router-dom";
 
 //Login page Component
 
 function Login() {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const expires = new Date(localStorage.getItem("tokenExpire"));
-  //   const token = localStorage.getItem("token");
-
-  //   if (token && expires > new Date()) {
-  //     //No token, redirect to login page
-  //     navigate("/login");
-  //     // window.location.href = "https://localhost:3000/api/auth/login";
-  //   } else {
-  //     //Token expired and refreshes
-  //     localStorage.removeItem("token");
-  //     localStorage.removeItem("tokenExpire");
-  //     navigate("/login");
-  //   }
-  // }, [navigate]);
-
-  //Redirecting user to the backend authorization
+  //Redirecting user to the backend authorization(backend endpt)
   const handleLogin = () => {
     window.location.href = "https://localhost:3000/api/auth/login";
   };
