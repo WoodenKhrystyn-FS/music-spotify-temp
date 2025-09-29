@@ -4,6 +4,8 @@ import LogoutBtn from "./LogoutBtn";
 
 function NavBar() {
   //Navigation bar with links to different pages and a logout button
+
+  
   return (
     <nav className="navbar" style={styles.navbar}>
       <Link to="/search" style={styles.link}>
