@@ -38,4 +38,9 @@ const styles = {
     textDecoration: "none",
     fontWeight: "bold",
   },
+  wrap: {
+    display: "flex",
+    gap: "15px",
+    alignItems: "center",
+  },
 };
