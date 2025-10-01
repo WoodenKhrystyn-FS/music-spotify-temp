@@ -74,12 +74,12 @@ function Search() {
       {error && <p>{error}</p>}
 
 
-      //Shown if no results found
+      {/*Shown if no results found*/}
       {!error && results.length === 0 && query && (
         <p>No results found. Try a different search.</p>
       )}
 
-      //Valid results shown:
+      {/*Valid results shown:*/}
       {results.length > 0 && (
         <ul className="results-list" style={styles.resultsList}>
           {results.map((item) => (
